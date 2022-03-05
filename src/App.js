@@ -9,6 +9,7 @@ import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
+import PlayerForm from './components/PlayerForms/PlayerForms'
 
 const App = () => {
   const [user, setUser] = useState(null)
@@ -51,8 +52,15 @@ const App = () => {
             path='/change-password'
             element={<ChangePassword msgAlert={msgAlert} user={user} /> }
           />
-
+          <Route
+            user={user}
+            path='/session'
+            element={
+              <PlayerForm msgAlert={msgAlert} user={user} />
+            }
+          />
         </Routes>
+
       </main>
     </>
   )
