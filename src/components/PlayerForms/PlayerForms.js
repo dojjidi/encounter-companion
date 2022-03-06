@@ -1,5 +1,9 @@
 import React from 'react'
 
+function handleSubmit (event) {
+  event.preventDefault()
+}
+
 class PlayerForm extends React.Component {
   constructor (props) {
     super(props)
@@ -23,7 +27,7 @@ class PlayerForm extends React.Component {
 
   render () {
     return (
-      <form>
+      <form onSubmit={ handleSubmit }>
         <label>
           Initiative:
           <input
@@ -32,7 +36,6 @@ class PlayerForm extends React.Component {
             value={this.state.initiative}
             onChange={this.handleInputChange} />
         </label>
-        <input type='submit' name='submit' />
         <label>
           HP:
           <input
@@ -49,7 +52,7 @@ class PlayerForm extends React.Component {
             value={this.state.hp}
             onChange={this.handleInputChange} />
         </label>
-        <input type='submit' name='submit-status-conditions' />
+        <input type='submit' name='submit-stats' />
       </form>
     )
   }
