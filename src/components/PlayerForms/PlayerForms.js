@@ -29,9 +29,17 @@ class PlayerForm extends React.Component {
     return (
       <form onSubmit={ handleSubmit }>
         <label>
+          Name:
+          <input
+            name="name"
+            type="string"
+            value={this.state.initiative}
+            onChange={this.handleInputChange} />
+        </label>
+        <label>
           Initiative:
           <input
-            name="Initiative"
+            name="initiative"
             type="number"
             value={this.state.initiative}
             onChange={this.handleInputChange} />
@@ -39,7 +47,7 @@ class PlayerForm extends React.Component {
         <label>
           HP:
           <input
-            name="HP"
+            name="hp"
             type="number"
             value={this.state.hp}
             onChange={this.handleInputChange} />
@@ -47,9 +55,9 @@ class PlayerForm extends React.Component {
         <label>
           Status Conditions:
           <input
-            name="Status Conditions"
+            name="statusConditions"
             type="string"
-            value={this.state.hp}
+            value={this.state.statusConditions}
             onChange={this.handleInputChange} />
         </label>
         <input type='submit' name='submit-stats' />
