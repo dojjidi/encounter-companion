@@ -1,4 +1,3 @@
-/* eslint-disable no-tabs */
 import React, { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'

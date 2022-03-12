@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Nav from '.././Shared/Header'
 import Footer from './Footer'
 
