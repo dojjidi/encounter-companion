@@ -9,7 +9,7 @@ import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
-import PlayerForm from './components/PlayerForms/PlayerForms'
+import PlayerForm from './components/Shared/PlayerForm'
 
 const App = () => {
   const [user, setUser] = useState(null)
