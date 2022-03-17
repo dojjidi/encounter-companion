@@ -2,19 +2,40 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
-const PlayerForm = ({ user }) => {
+const PlayerForm = ({ user, msgAlert }) => {
   const [playerForm, setPlayerForm] = useState({ name: '', initiative: '', hp: '', statusConditions: '' })
+  // const [playerForm, setPlayerForm] = useState('')
+  // const [name, setName] = useState('')
+  // const [initiative, setInitiative] = useState('')
+  // const [hp, setHP] = useState('')
+  // const [statusConditions, setStatusConditions] = useState('')
   const [playerFormId, setPlayerFormId] = useState('')
+  
   useEffect(() => {
     if (!playerFormId === '') {
       axios({
         url: `${apiUrl}/stats/${playerFormId}`,
         method: 'GET'
       })
-        .then(res => console.log(res.data))
-        .catch(console.error)
+        .then(res => {
+          console.log(res.data)
+          msgAlert({
+                  heading: 'Create PlayerForm Success',
+                  message: createPlayerFormSuccess,
+                  variant: 'success'
+                })
+        })
+        .catch(err => {
+          console.error(err)
+          msgAlert({
+                  heading: 'Create PlayerForm Failed with error: ' + err.message,
+                  message: createPlayerFormFailure,
+                  variant: 'danger'
+                })
+        })
     }
   }, [playerFormId])
+  
   const handleSubmit = (e) => {
   // prevent default
     e.preventDefault()
@@ -27,12 +48,53 @@ const PlayerForm = ({ user }) => {
         Authorization: `Bearer ${user.token}`
       }
     })
-      .then(res => setPlayerFormId(res.data.stats._id))
+      .then(res => {
+        setPlayerFormId(res.data.stats._id)
+        setPlayerForm({ name: '', initiative: '', hp: '', statusConditions: '' })
+        msgAlert({
+          heading: 'Create PlayerForm Success',
+          message: 'PlayerForm Created',
+          variant: 'success'
+        })
+      })
       // .then(console.log)
-      .catch(console.error)
+      .catch(err => {
+        console.error(err)
+        setPlayerForm({ name: '', initiative: '', hp: '', statusConditions: '' })
+        msgAlert({
+                heading: 'Create PlayerForm Failed with error: ' + err.message,
+                message: 'Could not Create',
+                variant: 'danger'
+              })
+      })
     // display resource to user once its create
     console.log(playerFormId, setPlayerFormId)
   }
+
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault()
+
+  //   try {
+  //     await PlayerForm(name, initiative, hp, statusConditions, user)
+  //     res => setPlayerFormId(res.data.stats._id)
+  //     msgAlert({
+  //       heading: 'Create PlayerForm Success',
+  //       message: createPlayerFormSuccess,
+  //       variant: 'success'
+  //     })
+  //     setShouldNavigate(true)
+  //   } catch (error) {
+  //     setName('')
+  //     setInitiative('')
+  //     setHP('')
+  //     setStatusConditions('')
+  //     msgAlert({
+  //       heading: 'Create PlayerForm Failed with error: ' + error.message,
+  //       message: createPlayerFormFailure,
+  //       variant: 'danger'
+  //     })
+  //   }
+  // }
 
   return (
     <form onSubmit={handleSubmit}>
